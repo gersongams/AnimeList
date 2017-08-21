@@ -1,3 +1,16 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<button type="button" class="btn btn-danger">Danger</button>
-
+<div class= "wrapper">
+<div class="container">
+<h1 class="text-center">{{title}}</h1>
+<nav>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink="/dashboard" routerLinkActive="active">Home</a>
+    </li>
+    <li class="breadcrumb-item active">
+      <a routerLink="/animes" routerLinkActive="active">Animes</a>
+    </li>
+  </ol>
+</nav>
+<router-outlet></router-outlet>
+</div>
+</div>
