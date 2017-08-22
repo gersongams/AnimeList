@@ -1,22 +1,26 @@
 <div *ngIf="anime">
     <div class="container py-3">
-      <div class="card card-inverse" style="background-color: #333; border-color: #333; color:#fff">
+      <div class="card card-inverse py-4 px-4" style="background-color: #333; border-color: #333; color:#fff">
         <div class="row ">
-          <div class="col-md-4">
-            <img src="https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400" class="w-100">
+          <div class="col-md-4 d-flex align-self-center justify-content-center">
+            <img src="{{ anime.anime_image}}" class="img-responsive img-thumbnail">
           </div>
           <div class="col-md-8 d-flex flex-column align-self-center">
             <div class="card-block">
-              <h4 class="card-title">{{anime.name}}</h4>
-              <p class="card-text my-0"> Genre </p>
-              <p class="card-text my-0"> Rank </p>
-              <p class="card-text mt-2">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-               Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-              cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <a href="#" class="btn btn-primary" (click)="goBack()">More Info</a>
-              <!--
-              <a href="#" class="btn btn-primary" (click)="save()">Save</a> -->
+              <h2 class="card-title" style="display:inline">{{anime.name}}</h2>
+              <span class="px-5"><strong>Ranking:</strong> {{anime.id}} </span>
+              <p class="card-text my-2">
+                <strong>Genero:</strong>
+                <span *ngFor="let animeg of anime.anime_genre">
+                  {{animeg}}
+                </span>
+              </p>
+              <p><strong>Descripcion: </strong></p>
+              <p class="card-text mt-2">{{anime.anime_description}}</p>
+              <a href="{{anime.anime_link}}" class="btn btn-primary" >More Info</a>
+              <a class="btn btn-danger" (click)="goBack()">
+              Go Back
+              </a>
             </div>
           </div>
         </div>
@@ -24,9 +28,7 @@
     </div>
 
     <div class="embed-responsive embed-responsive-16by9 py-4 my-4">
-      <iframe class="embed-responsive-item"
-        src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
-        allowfullscreen>
+      <iframe class="embed-responsive-item" [src]="anime.anime_video | safe" allowfullscreen>
       </iframe>
     </div>
 

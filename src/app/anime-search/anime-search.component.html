@@ -10,9 +10,10 @@
         </div>
       </div>
   </div>
-  <div>
-    <div *ngFor="let anime of animes | async" (click)="gotoDetail(anime)" class="search-result">
-      {{anime.name}}
-    </div>
+
+  <div class="list-group">
+    <a class="list-group-item list-group-item-action searchres" *ngFor="let anime of animes | async" (click)="gotoDetail(anime)">
+       {{anime.name}}
+    </a>
   </div>
 </div>

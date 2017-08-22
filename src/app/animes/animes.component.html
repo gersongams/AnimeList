@@ -1,22 +1,4 @@
-<h2>My Animes</h2>
-<!-- <ul class="animes">
-  <li *ngFor="let anime of animes" (click)="onSelect(anime)" [class.selected]="anime === selectedAnime">
-    <span class="badge">{{anime.id}}</span>
-    <span>{{anime.name}}</span>
-    <button class="delete" (click)="delete(anime); $event.stopPropagation()">x</button>
-  </li>
-</ul> -->
-
-<!-- <ul class="list-group">
-  <li class="list-group-item" *ngFor="let anime of animes" (click)="onSelect(anime)" >
-    <div class="d-flex justify-content-end">
-      <span class="badge badge-dark">{{anime.id}} </span>
-      <span> {{anime.name}}</span>
-      <button class="badge badge-danger ml-auto" (click)="delete(anime); $event.stopPropagation()">x</button>
-    </div>
-  </li>
-</ul> -->
-
+<h2>Top Animes</h2>
 
 <table class="table table-inverse table-bordered table-responsive table-striped table-hover">
   <thead>
@@ -27,32 +9,42 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row" class="text-center">1</th>
+    <tr *ngFor="let anime of animes" (click)="onSelect(anime)">
+      <th scope="row" class="text-center ">
+        <div class="d-flex flex-row justify-content-center align-items-center">
+           {{anime.id}}
+        </div>
+      </th>
       <td>
         <div class="card card-inverse" style="background-color: #333; border-color: #333; color:#fff">
           <div class="d-flex flex-row justify-content-start">
             <div class="d-flex flex-row justify-content-center">
-              <img src="http://bulma.io/images/placeholders/96x96.png" class="rounded float-left" alt="Image">
+              <img src="{{anime.anime_image}}" class="rounded float-left" alt="Image" style="height:150px; width:100px;">
             </div>
             <div class="d-flex flex-column align-self-center mx-2">
               <div class="card-block">
-                <h4 class="card-title">Name</h4>
-                <p class="card-text"> Genre</p>
+                <a [routerLink]="['/detail', anime.id]">
+                  <h4 class="card-title" (click)="onSelect(anime)">{{anime.name}}</h4>
+                </a>
+                <p class="card-text">
+                  <span *ngFor="let animeg of anime.anime_genre" >
+                    {{animeg}}
+                  </span>
+                </p>
               </div>
             </div>
           </div>
         </div>
       </td>
-      <td class="text-center">10</td>
+      <td class="text-center">{{anime.anime_score}}</td>
     </tr>
   </tbody>
 </table>
 
 
-<div *ngIf="selectedAnime">
+<!-- <div *ngIf="selectedAnime">
   <h2>
     {{selectedAnime.name | uppercase}} is my anime
   </h2>
   <button (click)="gotoDetail()">View Details</button>
-</div>
+</div> -->

@@ -6,6 +6,12 @@ import { Location } from "@angular/common";
 
 import { Anime } from "../anime";
 import { AnimeService } from "../anime.service";
+import {
+  DomSanitizer,
+  SafeResourceUrl,
+  SafeUrl
+} from "@angular/platform-browser";
+import {SafePipe} from './safe.pipe';
 
 @Component({
   selector: "app-anime-detail",
@@ -14,12 +20,18 @@ import { AnimeService } from "../anime.service";
 })
 export class AnimeDetailComponent implements OnInit {
   anime: Anime;
+  dangerousUrl: string;
+  trustedUrl: SafeUrl;
+  dangerousVideoUrl: string;
+  videoUrl: SafeResourceUrl;
 
   constructor(
     private animeService: AnimeService,
     private route: ActivatedRoute,
-    private location: Location
-  ) {}
+    private location: Location,
+    private sanitizer: DomSanitizer
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap
@@ -29,11 +41,18 @@ export class AnimeDetailComponent implements OnInit {
       .subscribe(anime => (this.anime = anime));
   }
 
-  save(): void {
-    this.animeService.update(this.anime).then(() => this.goBack());
-  }
-
   goBack(): void {
     this.location.back();
+  }
+
+  updateVideoUrl(linkvideo: string) {
+    // Appending an ID to a YouTube URL is safe.
+    // Always make sure to construct SafeValue objects as
+    // close as possible to the input data so
+    // that it's easier to check if the value is safe.
+    this.dangerousVideoUrl = linkvideo;
+    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      this.dangerousVideoUrl
+    );
   }
 }

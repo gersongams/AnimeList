@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from "@angular/forms"; // <-- NgModel lives here
 import { HttpModule } from "@angular/http";
 
+import { DomSanitizer } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { AnimeDetailComponent } from './anime-detail/anime-detail.component';
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from "angular-in-memory-web-api/in-memory-web-api.module";
 import { InMemoryDataService }  from './in-memory-data.service';
+import { SafePipe } from "../app/anime-detail/safe.pipe";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { InMemoryDataService }  from './in-memory-data.service';
     DashboardComponent,
     AnimesComponent,
     AnimeSearchComponent,
-    AnimeDetailComponent
+    AnimeDetailComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
